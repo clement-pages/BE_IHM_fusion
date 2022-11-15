@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<grammar  version="1.0"
+          mode ="voice"
+          xmlns="http://www.w3.org/2001/06/grammar"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.w3.org/2001/06/grammar
+                              grammar.xsd"
+          xml:lang="fr-FR" root="ordre" tag-format="semantics/1.0">
+
+	<meta name="description" content="Grammaire BE IHM multimodale"/>
+	<meta name="author" content="Bastian Muratory - Clément Pagés - Antoine Paulus"/>
+	<meta name="copyright" content="free to reuse"/>
+
+	<!-- ORDRE -> VERBE + ORDRE_NORMAL | ORDRE_CLASSIQUE --> 
+	<rule id="ordre" scope="public">
+		<item repeat="0-1">
+			<ruleref uri="#filler_debut"/>
+		</item>
+		<ruleref uri="#verbe"/>
+		<one-of>
+			<item> <ruleref uri="#ordre_normal" /> </item>
+			<item> <ruleref uri="#ordre_inverse" /> </item>
+		</one-of>
+	
+		<tag>
+			if(rules.verbe.action == "METTRE" &amp; rules.latest().couleur == "") rules.verbe.action = "DEPLACER";
+			if(rules.verbe.action == "METTRE" &amp; rules.latest().couleur != "") rules.verbe.action = "COULEUR";
+			out = "action=" + rules.verbe.action + " forme=" + rules.latest().forme + " couleur=" + rules.latest().couleur + " lieu=" + rules.latest().lieu 
+		</tag>
+		
+		<item repeat = "0-1">
+			<ruleref uri="#filler_fin"/>
+		</item>
+	</rule>
+	
+	
+	<!-- cas normal où on a FORME [+LIEU] -->
+	<rule id="ordre_normal" scope="public">
+		<ruleref uri="#formes"/>
+		<item repeat="0-1">
+			<ruleref uri="#lieu"/>
+		</item>
+		<tag> 
+			out.lieu = "";
+			out.forme = rules.formes.forme;
+			out.couleur = rules.formes.couleur;
+		</tag>
+	</rule>
+	
+	
+	<!-- ordre inverse LIEU + FORME -->
+	<rule id="ordre_inverse" scope="public">
+		<item> <ruleref uri="#lieu"/> </item>
+		<item> <ruleref uri="#formes"/></item>
+		<tag> 
+			out.lieu = "INVERSE";
+			out.forme = rules.formes.forme;
+			out.couleur = rules.formes.couleur;
+		</tag>
+	</rule>
+	
+	
+	<rule id = "verbe" scope = "public">
+		<one-of>
+			<item> créer 				<tag> out.action = "CREER"; 	</tag></item>
+			<item> crée	 				<tag> out.acton = "CREER"; 		</tag></item>
+			<item> dessiner 			<tag> out.action = "CREER"; 	</tag></item>
+			<item> dessine 				<tag> out.action = "CREER"; 	</tag></item>
+			<item> mettre 				<tag> out.action = "METTRE"; 	</tag></item>
+			<item> met 					<tag> out.action = "METTRE"; 	</tag></item>
+			<item> deplacer 			<tag> out.action = "DEPLACER"; 	</tag> </item>
+			<item> deplace 				<tag> out.acton = "DEPLACER"; 	</tag></item>
+			<item> supprimer 			<tag> out.action = "SUPPRIMER"; </tag> </item>
+			<item> supprime 			<tag> out.action = "SUPPRIMER"; </tag></item>
+			<item> changer 				<tag> out.action = "COULEUR"; 	</tag> </item>
+			<item> change 				<tag> out.action = "COULEUR"; 	</tag> </item>
+			<item> agrandir 			<tag> out.acton = "AGRANDIR"; 	</tag></item>
+			<item> agrandi 				<tag> out.acton="AGRANDIR"; 	</tag></item>
+			<item> a grande actionner 	<tag> out.action = "AGRANDIR"; 	</tag> </item>
+			<item> a grande actionne 	<tag> out.action = "AGRANDIR"; 	</tag> </item>
+			<item> rapetisser 			<tag> out.action = "REDUIRE"; 	</tag> </item>
+			<item> rapetisse 			<tag> out.action = "REDUIRE"; 	</tag> </item>
+			<item> réduire 				<tag> out.action = "REDUIRE"; 	</tag> </item>
+			<item> réduit 				<tag> out.action = "REDUIRE"; 	</tag> </item>
+		</one-of>
+	</rule>
+	
+	
+	<rule id = "formes" scope = "public">
+		<tag> out.couleur = "" </tag>
+		<item repeat="0-1">
+			<one-of>
+				<item> un </item>
+				<item> une </item>
+				<item> cette </item>
+				<item> ce </item>
+			</one-of>
+		</item>
+		<one-of>
+			<item> carré <tag> out.forme = "CARRE"; 			</tag> </item>
+			<item> rectangle <tag> out.forme = "CARRE"; 		</tag></item>
+			<item> losange <tag> out.forme = "LOSANGE"; 		</tag> </item>
+			<item> cercle <tag> out.forme = "CERCLE"; 			</tag> </item>
+			<item> triangle <tag> out.forme = "TRIANGLE"; 		</tag> </item>
+			<item> Jacqueline <tag> out.forme = "JACQUELINE"; 	</tag></item>
+			<item> forme <tag> out.forme = "FORME"; 			</tag> </item>
+			<item> ça <tag> out.forme = "FORME"; 				</tag> </item>
+		</one-of>
+		<item repeat="0-1">
+			<ruleref uri = "#couleurs"/>
+			<tag> out.couleur = rules.latest().couleur; </tag>
+		</item>
+	</rule>
+	
+
+	<rule id = "couleurs" scope = "public">
+		<item repeat= "0-1">
+			<one-of>
+				<item> de cette </item>
+				<item> de </item> 
+			</one-of>
+		</item>
+		<one-of>
+			<item> rouge 	<tag> out.couleur = "ROUGE"; 	</tag></item>
+			<item> bleu 	<tag> out.couleur = "BLEU"; 	</tag></item>
+			<item> vert 	<tag> out.couleur = "VERT"; 	</tag></item>
+			<item> verte 	<tag> out.couleur = "VERTE"; 	</tag></item>
+			<item> couleur 	<tag> out.couleur = "COULEUR"; 	</tag></item>
+		</one-of>
+	</rule>
+	
+	<rule id="lieu" scope="public">
+		<one-of>
+			<item> ici </item>
+			<item> la </item>
+		</one-of>
+		<tag> out.text = meta.current().text; </tag>
+	</rule>
+	
+	<rule id = "filler_debut" scope = "public">
+		<one-of>
+			<item> tu peux 				</item>
+			<item> peux-tu 				</item>
+			<item> pouvez-vous 			</item>
+			<item> j aimerais 			</item>
+			<item> j aimerais que tu 	</item>
+			<item> s il te plait 		</item>
+			<item> s il vous plait 		</item>
+		</one-of>
+	</rule>
+	
+	<rule id = "filler_fin" scope = "public">
+		<one-of>
+			<item> s il te plait 	</item>
+			<item> s il vous plait 	</item>
+		</one-of>
+	</rule>
+</grammar>
