@@ -212,34 +212,3 @@ void mousePressed() { // sur l'événement clic
     }
   }
 }
-
-
-void keyPressed() {
-  Point p = new Point(mouseX,mouseY);
-  switch(key) {
-    case 'r':
-      Forme f= new Rectangle(p);
-      formes.add(f);
-      mae=FSM.AFFICHER_FORMES;
-      break;
-      
-    case 'c':
-      Forme f2=new Mfja(p);
-      formes.add(f2);
-      mae=FSM.AFFICHER_FORMES;
-      break;
-    
-    case 't':
-      Forme f3=new Triangle(p);
-      formes.add(f3);
-       mae=FSM.AFFICHER_FORMES;
-      break;  
-      
-    case 'l':
-      Forme f4=new Losange(p);
-      formes.add(f4);
-      mae=FSM.AFFICHER_FORMES;
-      break;    
-      
-  }
-}
