@@ -13,6 +13,16 @@ abstract class Forme {
    this.c = color(127);
  }
  
+ Forme(Point p, String c){
+   this.origin = p;
+   switch(c){
+     case "ROUGE" : this.c = color(255, 0, 0);  break;
+     case "VERT"  : this.c = color(0, 255, 0);  break;
+     case "BLEU"  : this.c = color(0, 0, 255);  break;
+     default: this.c = color(127);
+   }
+ }
+ 
  void setColor(color c) {
    this.c=c;
  }

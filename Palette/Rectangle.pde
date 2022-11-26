@@ -10,6 +10,11 @@ public class Rectangle extends Forme {
     super(p);
     this.longueur=60;
   }
+  
+  public Rectangle(Point p, String c) {
+    super(p, c);
+    this.longueur=60;
+  }
    
   public void update() {
     fill(this.c);

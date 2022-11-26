@@ -9,7 +9,6 @@ import java.awt.Point;
 import fr.dgac.ivy.*;
 import processing.sound.*;
 import ddf.minim.*;
- 
 Minim minim;
 AudioPlayer player;
 
