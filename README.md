@@ -52,7 +52,7 @@ Finalement, ce mode de fonctionnement permet à l'utilisateur un certain nombre 
  - L'application permet aussi de dessiner une forme sur l'application gestuelle puis de selectionner l'emplacement de celle-ci sur la palette pour la faire apparaitre.
 
 
-Application Palette
+Application gestuelle
 ----
 L'application gestuelle permet de reconnaitre un geste effectué par l'utilisateur (ici un stroke sur un canvas). 
 Les differents geste que l'utilisateur peut effectuer sont les suivants :
@@ -60,3 +60,5 @@ Les differents geste que l'utilisateur peut effectuer sont les suivants :
  - un cercle
  - un J (Pour Jacqueline)
  - un triangle
+
+Ces differents gestes sont reconnues (avec une certaine précision) puis sont transmis à l'application Palette en utilisant Ivy. 
