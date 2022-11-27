@@ -1,64 +1,25 @@
 # BE_IHM_fusion
 
-Fonctionnement des applications :
-----
-L'application palette fonctionne en collaboration avec 2 autres application :
- - sra5 qui récupère une entrée audio provenant de l'utilisateur
- - le programme Gestuelle qui récupère les dessins de l'utilisateur 
+## Auteurs : Bastian MURATORY - Clément PAGES - Antoine PAULUS
 
-De son coté, l'application palette s'occupe de l'affichage des formes à l'écran ainsi que de récupérer les clics souris sur cet écran.
+## Installation et lancement du projet
 
-----
+### Pré-requis
 
-Application Palette
-----
-L'application fonctionne avec une machine à état composé de 4 états : 
+Processing doit avoir été installé sur la machine où le projet est exécuté, de préférence sous Windows
 
-  INITIAL - AFFICHER_FORMES - ATTENTE_PAROLE - ATTENTE_CLIC
+### Installation 
 
-> Etat INITIAL
+Télécharger l'archive du projet ou exécuter la commande suivante :
+```
+git clone https://github.com/clement-pages/BE_IHM_fusion.git
+```
 
-L'état INITIAL n'est présent qu'au début de l'application, il va de lui même vers le prochain état AFFICHER_FORMES.
+### Lancement de l'application
 
-> Etat AFFICHER_FORMES
-
-AFFICHER_FORMES est l'état dans lequell l'application affiche les formes est rest en attente des interractions avec l'utilisateur.
-
-Depuis l'état AFFICHER_FORMES il est possible de rejoindre les états suivants : 
- - ATTENTE_PAROLE (après un clic souris)
- - ATTENTE_CLIC (après réception d'un message gestuel depuis Ivy)
-
-> Etat ATTENTE_PAROLE
-
-ATTENTE_PAROLE est l'état dans lequel l'application a recu un ou plusieurs clics souris et attends donc la commande de l'utilisateur qui va déclancher l'action en question. 
-
-Dans cet état il est possible de transitionner vers l'état suivant :
- - AFFICHER_FORMES (après un délai de quelques secondes) : Ici on considère que l'utilisateur a seulement cliqué sur l'écran sans réelles intentions, cela peut être une erreur donc on revient dans l'état principal.
-
-> Etat ATTENTE_CLIC
-
-ATTENTE_CLIC est l'état dans lequel l'application a recu un geste depuis Ivy et attends l'emplacement ou devra aller la forme reconnue 
-
-Dans cet état il est possible de transitionner vers l'état suivant :
- - AFFICHER_FORMES (après un délai de quelques secondes) : Ici on considère que l'utilisateur a seulement effectué un geste sans intentions, cela peut être une erreur donc on revient dans l'état principal.
-
-
-> Conclusion 
-
-Finalement, ce mode de fonctionnement permet à l'utilisateur un certain nombre d'interractions :
- - Créer des formes avec la voix, selectionner leur emplacement avec un clic 
- - Déplacer une forme avec un clic sur la forme à déplacer puis un second clic vers la destination suivi de la commande "déplacer"
- - Des interractions spécifiques à une pièce :  agrandir, rétrécir, changer de couleur.
- - L'application permet aussi de dessiner une forme sur l'application gestuelle puis de selectionner l'emplacement de celle-ci sur la palette pour la faire apparaitre.
-
-
-Application gestuelle
-----
-L'application gestuelle permet de reconnaitre un geste effectué par l'utilisateur (ici un stroke sur un canvas). 
-Les differents geste que l'utilisateur peut effectuer sont les suivants :
- - un carré 
- - un cercle
- - un J (Pour Jacqueline)
- - un triangle
-
-Ces differents gestes sont reconnues (avec une certaine précision) puis sont transmis à l'application Palette en utilisant Ivy. 
+Pour pouvoir lancer la palette, lancer les différents agent ainsi que le bus IVY :
+1. Lancer le bus IVY en exécutant le fichier `./visionneur_1_2/visonneur.bat`
+2. Lancer la reconnaissance vocale en exécutant l'agent `sra5` : lancer le fichier `./Grammaire/sra5_on.bat`
+3. Lancer la reconnaissance de geste en ouvrant le fichier `./Gestuelle/Gestuelle.pde` puis en exécutant ce programme
+4. Finalement lancer la palette en ouvrant le fichier `./Palette/Palerre.pde` puis en exécutant le programme
+5. L'application est prête à être utilisée !
