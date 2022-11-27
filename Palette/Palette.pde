@@ -7,7 +7,6 @@
  
 import java.awt.Point;
 import fr.dgac.ivy.*;
-import processing.sound.*;
 import ddf.minim.*;
 Minim minim;
 AudioPlayer player;
@@ -195,6 +194,7 @@ void mousePressed() { // sur l'événement clic
           default:
             break;
         }
+        mae = FSM.AFFICHER_FORMES;
       }
       
       formes.add(f);
