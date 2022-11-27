@@ -125,7 +125,7 @@
 			<item> rouge 	<tag> out.couleur = "ROUGE"; 	</tag></item>
 			<item> bleu 	<tag> out.couleur = "BLEU"; 	</tag></item>
 			<item> vert 	<tag> out.couleur = "VERT"; 	</tag></item>
-			<item> verte 	<tag> out.couleur = "VERTE"; 	</tag></item>
+			<item> verte 	<tag> out.couleur = "VERT"; 	</tag></item>
 			<item> couleur 	<tag> out.couleur = "COULEUR"; 	</tag></item>
 		</one-of>
 	</rule>

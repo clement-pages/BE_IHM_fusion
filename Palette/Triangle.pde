@@ -7,16 +7,25 @@ public class Triangle extends Forme {
   public Triangle(Point p) {
     super(p);
     // placement des points
-    A = new Point();    
-    A.setLocation(p);
-    B = new Point();    
-    B.setLocation(A);
-    C = new Point();    
-    C.setLocation(A);
-    B.translate(40,60);
-    C.translate(-40,60);
+    placerPoints(p);
   }
   
+  public Triangle(Point p, String c){
+    super(p, c);
+    // placement des points
+    placerPoints(p);
+  }
+  
+  public void placerPoints(Point p){
+      A = new Point();    
+      A.setLocation(p);
+      B = new Point();    
+      B.setLocation(A);
+      C = new Point();    
+      C.setLocation(A);
+      B.translate(40,60);
+      C.translate(-40,60);
+  }
     void setLocation(Point p) {
       super.setLocation(p);
       // redéfinition de l'emplacement des points

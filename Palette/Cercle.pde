@@ -10,6 +10,11 @@ public class Cercle extends Forme {
     super(p);
     this.rayon=80;
   }
+  
+  public Cercle(Point p, String c) {
+    super(p, c);
+    this.rayon=80;
+  }
    
   public void update() {
     fill(this.c);

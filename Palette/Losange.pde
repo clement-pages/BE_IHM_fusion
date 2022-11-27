@@ -8,6 +8,16 @@ public class Losange extends Forme {
   public Losange(Point p) {
     super(p);
     // placement des points
+    placerPoints(p);
+  }
+  
+  public Losange(Point p, String c){
+    super(p, c);
+    // placement des points
+    placerPoints(p);
+  }
+  
+  public void placerPoints(Point p){
     A = new Point();    
     A.setLocation(p);
     B = new Point();    

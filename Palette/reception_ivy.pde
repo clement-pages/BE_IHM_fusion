@@ -10,24 +10,24 @@ void command_received(String action, String forme, String couleur, String lieu){
         }
         switch (forme){
           case "CARRE":
-            f = new Rectangle(position);
+            f = new Rectangle(position, couleur);
             break;
           
           case "LOSANGE":
-            f = new Losange(position);
+            f = new Losange(position, couleur);
             break;
           
           case "CERCLE":
-            f = new Cercle(position);
+            f = new Cercle(position, couleur);
             break;
           
           case "TRIANGLE":
-            f = new Triangle(position);
+            f = new Triangle(position, couleur);
             break;
             
           case "JACQUELINE":
             player.rewind();
-            f = new Mfja(dernier);
+            f = new Mfja(dernier, couleur);
             player.play();
           break;
         }
@@ -60,8 +60,18 @@ void command_received(String action, String forme, String couleur, String lieu){
     case "COULEUR":
       if(dernier != null){
         if(dernier.is_linked()){
-          dernier.get_forme().setColor(color(random(0,255),random(0,255),random(0,255)));
-          if(dernier.get_forme() instanceof Mfja){
+          switch(couleur){
+            case "ROUGE" : dernier.get_forme().setColor(color(255, 0, 0)); break;
+            case "VERT" : dernier.get_forme().setColor(color(0, 255, 0));  break;
+            case "BLEU" : dernier.get_forme().setColor(color(0, 0, 255));  break;
+            default:
+              if(avant_dernier != null){
+                avant_dernier.get_forme().setColor(dernier.get_forme().getColor());
+              }else{
+                dernier.get_forme().setColor(color(random(0,255),random(0,255),random(0,255)));
+              }
+          }
+          if((dernier.get_forme() instanceof Mfja && couleur != "COULEUR")){
             player.rewind();
             player.play();
           }

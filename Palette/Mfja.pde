@@ -12,6 +12,15 @@ public class Mfja extends Forme {
   
   public Mfja(Point p) {
     super(p);
+    creerMfja();
+  }
+  
+  public Mfja(Point p, String c){
+    super(p, c);
+    creerMfja();
+  }
+  
+  public void creerMfja(){
     originSprite = loadImage("data/MFJA.png");
     this.longueur=60;
     this.widthMfja = 176;
