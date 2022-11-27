@@ -4,7 +4,7 @@
  
 public class Rectangle extends Forme {
   
-  int longueur;
+  private int longueur;
   
   public Rectangle(Point p) {
     super(p);

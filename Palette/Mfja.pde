@@ -4,11 +4,11 @@
  */ 
  
 public class Mfja extends Forme {
-  PImage sprite;
-  PImage originSprite;
-  int longueur;
-  int widthMfja;
-  int heightMfja;
+  private PImage sprite;
+  private PImage originSprite;
+  private int longueur;
+  private int widthMfja;
+  private int heightMfja;
   
   public Mfja(Point p) {
     super(p);

@@ -28,7 +28,7 @@ String last_forme;
 
 
 void setup() {
-  last_forme = "banane";
+  last_forme = "";
   timer = 0;
   size(800,600);
   surface.setResizable(true);
