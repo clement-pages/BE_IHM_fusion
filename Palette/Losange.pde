@@ -3,7 +3,7 @@
  */ 
  
 public class Losange extends Forme {
-  Point A, B,C,D;
+  private Point A, B,C,D;
   
   public Losange(Point p) {
     super(p);
@@ -31,7 +31,7 @@ public class Losange extends Forme {
     C.translate(0,120);
   }
   
-  void setLocation(Point p) {
+  public void setLocation(Point p) {
       super.setLocation(p);
       // redéfinition de l'emplacement des points
       A.setLocation(p);   
@@ -48,7 +48,7 @@ public class Losange extends Forme {
     quad((float) A.getX(), (float) A.getY(), (float) B.getX(), (float) B.getY(), (float) C.getX(), (float) C.getY(),  (float) D.getX(),  (float) D.getY());
   }  
   
-  boolean isClicked(Point M) {
+  public boolean isClicked(Point M) {
     // vérifier que le losange est cliqué
     // aire du rectangle AMD + AMB + BMC + CMD = aire losange  
     if (round( (float) (aire_triangle(A,M,D) + aire_triangle(A,M,B) + aire_triangle(B,M,C) + aire_triangle(C,M,D))) == round((float) aire()))

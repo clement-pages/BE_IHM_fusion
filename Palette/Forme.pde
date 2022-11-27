@@ -5,15 +5,15 @@
  */
 
 abstract class Forme {
- Point origin;
- color c;
+ protected Point origin;
+ protected color c;
  
- Forme(Point p) {
+ public Forme(Point p) {
    this.origin=p;
    this.c = color(127);
  }
  
- Forme(Point p, String c){
+ public Forme(Point p, String c){
    this.origin = p;
    switch(c){
      case "ROUGE" : this.c = color(255, 0, 0);  break;
@@ -23,28 +23,28 @@ abstract class Forme {
    }
  }
  
- void setColor(color c) {
+ public void setColor(color c) {
    this.c=c;
  }
  
- color getColor(){
+ public color getColor(){
    return(this.c);
  }
  
- abstract void update();
+ public abstract void update();
  
- abstract void increase();
- abstract void decrease();
+ public abstract void increase();
+ public abstract void decrease();
  
- Point getLocation() {
+ public Point getLocation() {
    return(this.origin);
  }
  
- void setLocation(Point p) {
+ public void setLocation(Point p) {
    this.origin = p;
  }
  
- abstract boolean isClicked(Point p);
+ public abstract boolean isClicked(Point p);
  
  // Calcul de la distance entre 2 points
  protected double distance(Point A, Point B) {

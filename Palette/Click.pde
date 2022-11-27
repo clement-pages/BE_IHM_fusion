@@ -1,17 +1,17 @@
 class Click extends Point{
-  Forme f;
+  private Forme f;
   
-  Click(Point p, Forme f){
+  public Click(Point p, Forme f){
     super(p.x,p.y);
     this.f = f;
   }
   
-  Click(int x, int y, Forme f){
+  public Click(int x, int y, Forme f){
     super(x,y);
     this.f = f;
   }
   
-  boolean is_linked(){
+  public boolean is_linked(){
     if(this.f == null){
       return false;
     }
@@ -19,7 +19,7 @@ class Click extends Point{
   }
   
   
-  Forme get_forme(){
+  public Forme get_forme(){
     return this.f;
   }
   
